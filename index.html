@@ -100,26 +100,26 @@
                 return;
             }
 
-            var webUrl = 'https://www.vinted.' + encodeURIComponent(tld) + '/items/' + encodeURIComponent(id);
-            var intentUrl = 'intent://items/' + encodeURIComponent(id)
+            var webUrl = 'https://www.vinted.' + tld + '/items/' + id;
+            var intentUrl = 'intent://items/' + id
                 + '#Intent;scheme=vinted;package=com.vinted;'
-                + 'S.browser_fallback_url=' + encodeURIComponent(webUrl) + ';end';
+                + 'S.browser_fallback_url=' + webUrl + ';end';
+            var appSchemeUrl = 'vinted://items/' + id;
 
             var ua = navigator.userAgent || '';
             var isAndroid = /android/i.test(ua);
             var isIOS = /iphone|ipad|ipod/i.test(ua);
 
-            document.getElementById('btn-app').href = intentUrl;
             document.getElementById('btn-web').href = webUrl;
 
-            // Auto-redirect on Android
             if (isAndroid) {
+                document.getElementById('btn-app').href = intentUrl;
                 window.location.href = intentUrl;
-            }
-
-            // Show iOS hint in Instagram WebView
-            if (isIOS) {
+            } else if (isIOS) {
+                document.getElementById('btn-app').href = appSchemeUrl;
                 document.getElementById('ios-hint').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-app').href = webUrl;
             }
 
             // Show buttons after a short delay
