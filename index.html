@@ -79,14 +79,8 @@
 
         <!-- Buttons (shown after detection) -->
         <div id="buttons" class="hidden">
-            <div id="ios-hint" class="ios-hint hidden">
-                📱 Instagram bloque l'ouverture directe de l'app.<br>
-                Appuyez sur <strong>⋮</strong> (en haut à droite) puis <strong>« Ouvrir dans Safari »</strong> pour ouvrir l'article dans Vinted.
-            </div>
-            <a id="btn-intent" class="btn btn-primary" href="#">1. Intent (Android)</a>
-            <a id="btn-scheme" class="btn btn-primary" href="#">2. App Scheme (vinted://)</a>
-            <a id="btn-universal" class="btn btn-primary" href="#">3. Universal Link (vinted.fr/items/…)</a>
-            <a id="btn-web" class="btn btn-secondary" href="#">4. Site web (www.vinted.fr)</a>
+            <a id="btn-app" class="btn btn-primary" href="#">Ouvrir dans Vinted</a>
+            <a id="btn-web" class="btn btn-secondary" href="#">Ouvrir sur le site web</a>
         </div>
     </div>
 
@@ -103,25 +97,12 @@
             }
 
             var webUrl = 'https://www.vinted.' + tld + '/items/' + id;
-            var intentUrl = 'intent://items/' + id
-                + '#Intent;scheme=vinted;package=com.vinted;'
-                + 'S.browser_fallback_url=' + webUrl + ';end';
-            var appSchemeUrl = 'vinted://items/' + id;
 
-            var ua = navigator.userAgent || '';
-            var isAndroid = /android/i.test(ua);
-            var isIOS = /iphone|ipad|ipod/i.test(ua);
-
-            var universalUrl = 'https://www.vinted.' + tld + '/items/' + id;
-
-            document.getElementById('btn-intent').href = intentUrl;
-            document.getElementById('btn-scheme').href = appSchemeUrl;
-            document.getElementById('btn-universal').href = universalUrl;
+            document.getElementById('btn-app').href = webUrl;
             document.getElementById('btn-web').href = webUrl;
 
-            if (isIOS) {
-                document.getElementById('ios-hint').classList.remove('hidden');
-            }
+            // Auto-redirect to open the app via universal link
+            window.location.href = webUrl;
 
             // Show buttons after a short delay
             setTimeout(function () {
