@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ouvrir dans Vinted</title>
+    <title>Voir cet article sur Vinted</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Voir cet article sur Vinted">
+    <meta property="og:description" content="Appuyez pour ouvrir directement dans l'app Vinted">
+    <meta property="og:image" content="https://marketplace-web-assets.vinted.com/_next/static/media/meta-preview-image.6ec43970.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinted Links">
+
+    <!-- Twitter / WhatsApp -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Voir cet article sur Vinted">
+    <meta name="twitter:description" content="Appuyez pour ouvrir directement dans l'app Vinted">
+    <meta name="twitter:image" content="https://marketplace-web-assets.vinted.com/_next/static/media/meta-preview-image.6ec43970.jpg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -68,7 +81,6 @@
             var tld = params.get('tld') || 'fr';
 
             if (!id || !/^\d+$/.test(id)) {
-                document.getElementById('loading').classList.add('hidden');
                 document.getElementById('error').classList.remove('hidden');
                 return;
             }
