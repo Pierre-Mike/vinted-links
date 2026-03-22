@@ -69,7 +69,9 @@
         <div id="buttons" class="hidden">
             <h1>Voir cet article</h1>
             <p class="subtitle">Appuyez pour ouvrir dans l'app Vinted</p>
-            <a id="btn-app" class="btn btn-primary" href="#">Ouvrir dans Vinted</a>
+            <a id="btn-universal" class="btn btn-primary" href="#">Ouvrir dans Vinted</a>
+            <a id="btn-intent" class="btn btn-secondary" href="#">Ouvrir via Intent (Android)</a>
+            <a id="btn-scheme" class="btn btn-secondary" href="#">Ouvrir via App Scheme</a>
             <a id="btn-web" class="btn btn-secondary" href="#">Ouvrir sur le site web</a>
         </div>
     </div>
@@ -86,8 +88,14 @@
             }
 
             var webUrl = 'https://www.vinted.' + tld + '/items/' + id;
+            var intentUrl = 'intent://items/' + id
+                + '#Intent;scheme=vinted;package=com.vinted;'
+                + 'S.browser_fallback_url=' + webUrl + ';end';
+            var schemeUrl = 'vinted://items/' + id;
 
-            document.getElementById('btn-app').href = webUrl;
+            document.getElementById('btn-universal').href = webUrl;
+            document.getElementById('btn-intent').href = intentUrl;
+            document.getElementById('btn-scheme').href = schemeUrl;
             document.getElementById('btn-web').href = webUrl;
             document.getElementById('buttons').classList.remove('hidden');
         })();
