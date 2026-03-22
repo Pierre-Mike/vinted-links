@@ -83,8 +83,10 @@
                 📱 Instagram bloque l'ouverture directe de l'app.<br>
                 Appuyez sur <strong>⋮</strong> (en haut à droite) puis <strong>« Ouvrir dans Safari »</strong> pour ouvrir l'article dans Vinted.
             </div>
-            <a id="btn-app" class="btn btn-primary" href="#">Ouvrir dans Vinted</a>
-            <a id="btn-web" class="btn btn-secondary" href="#">Ouvrir sur le site web</a>
+            <a id="btn-intent" class="btn btn-primary" href="#">1. Intent (Android)</a>
+            <a id="btn-scheme" class="btn btn-primary" href="#">2. App Scheme (vinted://)</a>
+            <a id="btn-universal" class="btn btn-primary" href="#">3. Universal Link (vinted.fr/items/…)</a>
+            <a id="btn-web" class="btn btn-secondary" href="#">4. Site web (www.vinted.fr)</a>
         </div>
     </div>
 
@@ -110,16 +112,15 @@
             var isAndroid = /android/i.test(ua);
             var isIOS = /iphone|ipad|ipod/i.test(ua);
 
+            var universalUrl = 'https://www.vinted.' + tld + '/items/' + id;
+
+            document.getElementById('btn-intent').href = intentUrl;
+            document.getElementById('btn-scheme').href = appSchemeUrl;
+            document.getElementById('btn-universal').href = universalUrl;
             document.getElementById('btn-web').href = webUrl;
 
-            if (isAndroid) {
-                document.getElementById('btn-app').href = intentUrl;
-                window.location.href = intentUrl;
-            } else if (isIOS) {
-                document.getElementById('btn-app').href = appSchemeUrl;
+            if (isIOS) {
                 document.getElementById('ios-hint').classList.remove('hidden');
-            } else {
-                document.getElementById('btn-app').href = webUrl;
             }
 
             // Show buttons after a short delay
